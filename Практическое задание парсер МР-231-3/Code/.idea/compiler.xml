@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/mr-231-3/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -8,7 +11,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mr-231" />
         <module name="startApp" />
+        <module name="mr-231-3" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mr-231-31" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

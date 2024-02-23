@@ -2,7 +2,9 @@ package org.example;
 
 import org.example.searadar.mr231.convert.Mr231Converter;
 import org.example.searadar.mr231.station.Mr231StationType;
+import org.example.searadar.mr231_3.station.Mr_231_3_StationType;
 import ru.oogis.searadar.api.message.SearadarStationMessage;
+import org.example.searadar.mr231_3.convert.*;
 
 import java.util.List;
 
@@ -31,15 +33,16 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         // Контрольный пример для МР-231
-        String mr231_TTM = "$RATTM,66,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
+//        String mr231_TTM = "$RATTM,66,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
 //        String mr231_VHW = "$RAVHW...";
 //        String mr231_RSD = "$RATTM...";
 
         // Проверка работы конвертера
-        Mr231StationType mr231 = new Mr231StationType();
-        Mr231Converter converter = mr231.createConverter();
-        List<SearadarStationMessage> searadarMessages = converter.convert(mr231_TTM);
-        searadarMessages.forEach(System.out::println);
+//        Mr231StationType mr231 = new Mr231StationType();
+//
+//        Mr231Converter converter = mr231.createConverter();
+//        List<SearadarStationMessage> searadarMessages = converter.convert(mr231_TTM);
+//        searadarMessages.forEach(System.out::println);
 //        searadarMessages = converter.convert(mr231_VHW);
 //        searadarMessages.forEach(System.out::println);
 //        searadarMessages = converter.convert(mr231_RSD);
@@ -48,8 +51,18 @@ public class App {
 
         // Контрольный пример для МР-231-3
         // ваш код.....................
+        String mr231_3_TTM = "$RATTM,66,280.710,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
+        String mr231_3_RSD = "$RARSD,66,28.71,341.1,23,,,,,4.1,21,12,K,Y,S*42";
+
 
         // Проверка работы конвертера МР-231-3
         // ваш код.....................
+        Mr_231_3_StationType mr_231_3_stationType = new Mr_231_3_StationType();
+        Mr231_3Converter mr231_3Converter = mr_231_3_stationType.createConverter();
+        List<SearadarStationMessage> searadarStationMessages = mr231_3Converter.convert(mr231_3_TTM);
+        searadarStationMessages.forEach(System.out::println);
+
+        searadarStationMessages = mr231_3Converter.convert(mr231_3_RSD);
+        searadarStationMessages.forEach(System.out::println);
     }
 }

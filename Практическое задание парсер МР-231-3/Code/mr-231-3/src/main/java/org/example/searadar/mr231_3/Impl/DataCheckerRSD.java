@@ -23,10 +23,6 @@ public class DataCheckerRSD implements DataChecker {
 
     public List<InvalidMessage> checkData(RadarSystemDataMessage rsd) {
         List<InvalidMessage> list = new ArrayList<>();
-        if (rsd==null){
-            DataChecker.addMsgInfo(list,"RSD = null");
-            return list;
-        }
         if (rsd.getBearing()<0){
             DataChecker.addMsgInfo(list,"Неверный пеленг: "+rsd.getBearing());
         }
@@ -42,7 +38,6 @@ public class DataCheckerRSD implements DataChecker {
         if (!rsd.getWorkingMode().equals("S") && !rsd.getWorkingMode().equals("P")){
             DataChecker.addMsgInfo(list, "Неверный формат режима работы НРЛС (S/P): "+rsd.getWorkingMode());
         }
-        System.out.println("@@@@@@@@@@@@@@@@@@@@");
         return list;
     }
 }

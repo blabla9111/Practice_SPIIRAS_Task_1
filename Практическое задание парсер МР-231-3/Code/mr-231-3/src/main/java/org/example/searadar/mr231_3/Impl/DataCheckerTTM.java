@@ -16,10 +16,6 @@ public class DataCheckerTTM implements DataChecker {
 
     public List<InvalidMessage> checkData(TrackedTargetMessage ttm) {
         List<InvalidMessage> list = new ArrayList<>();
-        if (ttm==null){
-            DataChecker.addMsgInfo(list,"TTM = null");
-            return list;
-        }
         if ( ttm.getTargetNumber()<1 || ttm.getTargetNumber()>50){
             DataChecker.addMsgInfo(list,"Неверный номер цели: "+ttm.getTargetNumber());
         }
@@ -44,7 +40,6 @@ public class DataCheckerTTM implements DataChecker {
         if (ttm.getType()==null){
             DataChecker.addMsgInfo(list,"Отсутствует тип цели");
         }
-        System.out.println("!!!!!!!!!!!!");
         return list;
     }
 }

@@ -15,6 +15,7 @@ import ru.oogis.searadar.api.types.TargetType;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -27,11 +28,11 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
         return convert(exchange.getIn().getBody(String.class));
     }
 
-    public List<SearadarStationMessage> convert(String message){
+    public List<SearadarStationMessage> convert(String message) throws Exception {
 
         List<SearadarStationMessage> msgList = new ArrayList<>();
         DataChecker checker;
-        List<InvalidMessage> invalidMessages;
+        List<InvalidMessage> invalidMessages = new ArrayList<>();
         readFields(message);
 
         switch (msgType) {
@@ -42,37 +43,36 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
                     TrackedTargetMessage ttm = getTTM();
                     checker = new DataCheckerTTM();
                     invalidMessages = checker.checkData(ttm);
-                    if (invalidMessages!=null){
+                    if (!invalidMessages.isEmpty()){
                         msgList.addAll(invalidMessages);
-//                        System.out.println(((InvalidMessage)msgList.get(0)).getInfoMsg());
-                        msgList.stream().forEach(e->System.out.println(((InvalidMessage)e).getInfoMsg()));
                     }
                     else{
                         msgList.add(ttm);
                     }
                 }
                 else{
+                    DataChecker.addMsgInfo(invalidMessages,"Размер неправильный для TTM "+fields.length);
+                    msgList.addAll(invalidMessages);
                     System.out.println("Размер неправильный для TTM "+fields.length);
                 }
 
                 break;
 
             case "RSD" : {
-                // лучше сделать сначала проверку потом создавать rsd
                 if(fields.length==15){
                     RadarSystemDataMessage rsd = getRSD();
                     checker = new DataCheckerRSD();
                     invalidMessages = checker.checkData(rsd);
-                    if (invalidMessages!=null){
+                    if (!invalidMessages.isEmpty()){
                         msgList.addAll(invalidMessages);
-                        msgList.stream().forEach(e->System.out.println(((InvalidMessage)e).getInfoMsg()));
                     }
                     else{
                         msgList.add(rsd);
                     }
                 }
                 else{
-                    System.out.println("Размер неправильный для RSD "+fields.length);
+                    DataChecker.addMsgInfo(invalidMessages,"Размер неправильный для RSD "+fields.length);
+                    msgList.addAll(invalidMessages);
                 }
 
                 break;
@@ -83,7 +83,7 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
         return msgList;
     }
 
-    private void readFields(String msg) {
+    private void readFields(String msg) throws Exception {
         // убираю $RA вначале и *ЧИСЛО в конце
         try{
             String temp = msg.substring( 3, msg.indexOf("*") ).trim();
@@ -92,12 +92,12 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
             msgType = fields[0];
         }
         catch (Exception e){
-            System.out.println("Ошибка в введенной строке:\n"+e.getMessage());
+            throw new Exception("Ошибка в введенной строке:\n"+e.getMessage());
         }
 
     }
 
-    private RadarSystemDataMessage getRSD() {
+    private RadarSystemDataMessage getRSD() throws Exception {
         RadarSystemDataMessage rsd = new RadarSystemDataMessage();
 
         rsd.setMsgRecTime(new Timestamp(System.currentTimeMillis()));
@@ -114,15 +114,15 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
             rsd.setWorkingMode(fields[14]);
         }
         catch (Exception e){
-            System.out.println("RSD Ошибка во время преобразования введения данных\n"+e.getMessage());
-            return null;
+            System.out.println("RSD Ошибка во время преобразования введенных данных\n"+e.getMessage());
+            throw new Exception("RSD Ошибка во время преобразования введенных данных\n"+e.getMessage());
         }
-
+        System.out.println(Arrays.toString(fields));
 
         return rsd;
     }
 
-    private TrackedTargetMessage getTTM() {
+    private TrackedTargetMessage getTTM() throws Exception {
         TrackedTargetMessage ttm = new TrackedTargetMessage();
         Long msgRecTimeMillis = System.currentTimeMillis();
 
@@ -163,13 +163,13 @@ public class Mr231_3Converter implements SearadarExchangeConverter {
             ttm.setCourse(Double.parseDouble(fields[6]));
         }
         catch (Exception e){
-            System.out.println("TTM Ошибка во время преобразования введения данных\n"+e.getMessage());
+            throw new Exception("TTM Ошибка во время преобразования введения данных\n"+e.getMessage());
         }
         ttm.setStatus(status);
         ttm.setIff(iff);
 
         ttm.setType(type);
-
+        System.out.println(Arrays.toString(fields));
         return ttm;
     }
 

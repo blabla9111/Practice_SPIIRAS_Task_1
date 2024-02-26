@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // Контрольный пример для МР-231
 //        String mr231_TTM = "$RATTM,66,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
 //        String mr231_VHW = "$RAVHW...";
@@ -51,8 +51,8 @@ public class App {
 
         // Контрольный пример для МР-231-3
         // ваш код.....................
-        String mr231_3_TTM = "$RATTM,66,280.710,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
-        String mr231_3_RSD = "$RARSD,66,28.71,341.1,23,,,,,4.1,21,12,K,Y,S*42";
+        String mr231_3_TTM = "$RATTM,6,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
+        String mr231_3_RSD = "$RARSD,12,28.71,341.1,23,,,,,4.1,21,12,K,C,S*42";
 
 
         // Проверка работы конвертера МР-231-3
@@ -62,7 +62,7 @@ public class App {
         List<SearadarStationMessage> searadarStationMessages = mr231_3Converter.convert(mr231_3_TTM);
         searadarStationMessages.forEach(System.out::println);
 
-        searadarStationMessages = mr231_3Converter.convert(mr231_3_RSD);
-        searadarStationMessages.forEach(System.out::println);
+//        searadarStationMessages = mr231_3Converter.convert(mr231_3_RSD);
+//        searadarStationMessages.forEach(System.out::println);
     }
 }

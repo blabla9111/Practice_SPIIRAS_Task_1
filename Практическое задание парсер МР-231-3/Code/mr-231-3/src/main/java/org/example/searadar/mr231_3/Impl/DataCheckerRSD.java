@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ *  Класс для проверки правильности данных RadarSystemDataMessage
+ *
+ */
 public class DataCheckerRSD implements DataChecker {
     /**
-     * @param ssm
-     * @return
+     *  Значения в шкале дальности
+     *
      */
     private static final Double[] DISTANCE_SCALE = {0.125, 0.25, 0.5, 1.5, 3.0, 6.0, 12.0, 24.0, 48.0, 96.0};
 
@@ -21,6 +25,17 @@ public class DataCheckerRSD implements DataChecker {
         return checkData((RadarSystemDataMessage) ssm);
     }
 
+    /**
+     * Проверяет, что данные в объекте класса RadarSystemDataMessage
+     * соотвествуют допустимым значениям из документации
+     *
+     * <p>
+     *     Если есть ошибки в значениях, то соответствующая запись появляется в
+     *     List<InvalidMessage>, если ошибок нет, то возвращается пустой список.
+     * @param rsd -- объекте класса RadarSystemDataMessage
+     * @return List<InvalidMessage> -- список с ошибками
+     * @see InvalidMessage
+     */
     public List<InvalidMessage> checkData(RadarSystemDataMessage rsd) {
         List<InvalidMessage> list = new ArrayList<>();
         if (rsd.getBearing()<0){

@@ -50,19 +50,17 @@ public class App {
 
 
         // Контрольный пример для МР-231-3
-        // ваш код.....................
         String mr231_3_TTM = "$RATTM,6,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,А*42";
         String mr231_3_RSD = "$RARSD,12,28.71,341.1,23,,,,,4.1,21,12,K,C,S*42";
 
 
         // Проверка работы конвертера МР-231-3
-        // ваш код.....................
         Mr_231_3_StationType mr_231_3_stationType = new Mr_231_3_StationType();
         Mr231_3Converter mr231_3Converter = mr_231_3_stationType.createConverter();
         List<SearadarStationMessage> searadarStationMessages = mr231_3Converter.convert(mr231_3_TTM);
         searadarStationMessages.forEach(System.out::println);
 
-//        searadarStationMessages = mr231_3Converter.convert(mr231_3_RSD);
-//        searadarStationMessages.forEach(System.out::println);
+        searadarStationMessages = mr231_3Converter.convert(mr231_3_RSD);
+        searadarStationMessages.forEach(System.out::println);
     }
 }

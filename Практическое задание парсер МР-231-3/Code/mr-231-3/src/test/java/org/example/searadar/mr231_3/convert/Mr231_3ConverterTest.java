@@ -84,7 +84,7 @@ class Mr231_3ConverterTest {
 
         assertEquals(1, actualList.size());
     }
-
+// добавить тесты на ошибку во время парсинга, и неверные значения
     @Test
     void convert_IncorrectTTMSise_ReturnInvalidMessage() throws Exception {
         String mr231_3_TTM = "$RATTM,6,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,1,А*42";

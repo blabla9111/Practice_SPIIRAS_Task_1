@@ -8,12 +8,27 @@ import ru.oogis.searadar.api.message.TrackedTargetMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  Класс для проверки правильности данных TrackedTargetMessage
+ *
+ */
 public class DataCheckerTTM implements DataChecker {
     @Override
     public List<InvalidMessage> checkData(SearadarStationMessage ssm) {
         return checkData((TrackedTargetMessage) ssm);
     }
 
+    /**
+     * Проверяет, что данные в объекте класса TrackedTargetMessage
+     * соотвествуют допустимым значениям из документации
+     *
+     * <p>
+     *     Если есть ошибки в значениях, то соответствующая запись появляется в
+     *     List<InvalidMessage>, если ошибок нет, то возвращается пустой список.
+     * @param ttm -- объекте класса TrackedTargetMessage
+     * @return List<InvalidMessage> -- список с ошибками
+     * @see InvalidMessage
+     */
     public List<InvalidMessage> checkData(TrackedTargetMessage ttm) {
         List<InvalidMessage> list = new ArrayList<>();
         if ( ttm.getTargetNumber()<1 || ttm.getTargetNumber()>50){

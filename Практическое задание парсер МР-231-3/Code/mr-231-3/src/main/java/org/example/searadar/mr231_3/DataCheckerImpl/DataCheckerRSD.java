@@ -1,4 +1,4 @@
-package org.example.searadar.mr231_3.Impl;
+package org.example.searadar.mr231_3.DataCheckerImpl;
 
 import org.example.searadar.mr231_3.DataChecker;
 import ru.oogis.searadar.api.message.InvalidMessage;

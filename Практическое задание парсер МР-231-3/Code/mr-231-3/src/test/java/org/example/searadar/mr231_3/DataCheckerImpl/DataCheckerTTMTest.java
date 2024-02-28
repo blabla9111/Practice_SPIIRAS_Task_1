@@ -1,4 +1,4 @@
-package org.example.searadar.mr231_3.Impl;
+package org.example.searadar.mr231_3.DataCheckerImpl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

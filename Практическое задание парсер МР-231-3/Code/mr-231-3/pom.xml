@@ -1,23 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>org.example</groupId>
-  <artifactId>startApp</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>mr-231-3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Archetype - mr-231-3</name>
+    <url>http://maven.apache.org</url>
     <dependencies>
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>mr-231</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-        <!--            <groupId>org.example</groupId>-->
-        <!--            <artifactId>mr-231-3</artifactId>-->
-        <!--            <version>1.0-SNAPSHOT</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
@@ -25,10 +21,10 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>mr-231-3</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
@@ -43,6 +39,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

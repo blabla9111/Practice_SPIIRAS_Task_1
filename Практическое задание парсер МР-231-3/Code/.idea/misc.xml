@@ -7,7 +7,14 @@
         <option value="$PROJECT_DIR$/build/pom.xml" />
         <option value="$PROJECT_DIR$/mr-231/pom.xml" />
         <option value="$PROJECT_DIR$/startApp/pom.xml" />
+        <option value="$PROJECT_DIR$/mr-231-3/pom.xml" />
+        <option value="$PROJECT_DIR$/mr-231-31/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/mr-231-31/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">

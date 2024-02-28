@@ -10,7 +10,7 @@
     <modules>
         <module>../startApp</module>
         <module>../mr-231</module>
-        <!--      <module>../mr-231-3</module>-->
+        <module>../mr-231-3</module>
     </modules>
 
     <build>

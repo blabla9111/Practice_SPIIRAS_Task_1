@@ -84,7 +84,7 @@ class Mr231_3ConverterTest {
 
         assertEquals(1, actualList.size());
     }
-// добавить тесты на ошибку во время парсинга, и неверные значения
+
     @Test
     void convert_IncorrectTTMSise_ReturnInvalidMessage() throws Exception {
         String mr231_3_TTM = "$RATTM,6,28.71,341.1,T,57.6,024.5,T,0.4,4.1,N,b,L,,457362,1,А*42";
@@ -131,8 +131,6 @@ class Mr231_3ConverterTest {
     void readFields_IncorrectData_ExceptionThrown() throws Exception {
         // проверка на то, есть в строке минимальное кол-во символов,
         // и где верно ли расположена *
-        // no *
-        // * [0-3] positions
         Method readFieldsMethod = Mr231_3Converter.class.getDeclaredMethod("readFields", String.class);
         readFieldsMethod.setAccessible(true);
         Exception thrown = assertThrows(Exception.class, () -> readFieldsMethod.invoke(mr231_3Converter, "1*"));
@@ -165,14 +163,40 @@ class Mr231_3ConverterTest {
     @Test
     void getTTM_IncorrectData_ExceptionThrown() throws Exception {
         // exception while parsing
-        String[] fields = new String[]{"TTM", "w6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
+        String[] fields = new String[]{"TTM", "6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
         Method getTTMMethod = Mr231_3Converter.class.getDeclaredMethod("getTTM", null);
         getTTMMethod.setAccessible(true);
-
         Field fieldsField = mr231_3Converter.getClass().getDeclaredField("fields");
         fieldsField.setAccessible(true);
+
+        fields[1]="rre";
         fieldsField.set(mr231_3Converter, fields);
         Exception thrown = assertThrows(Exception.class, () -> getTTMMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("TTM Ошибка во время преобразования введения данных"));
+
+
+        fields = new String[]{"TTM", "6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
+        fields[2]="rre";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getTTMMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("TTM Ошибка во время преобразования введения данных"));
+
+        fields = new String[]{"TTM", "6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
+        fields[3]="rre";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getTTMMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("TTM Ошибка во время преобразования введения данных"));
+
+        fields = new String[]{"TTM", "6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
+        fields[5]="rre";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getTTMMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("TTM Ошибка во время преобразования введения данных"));
+
+        fields = new String[]{"TTM", "6", "28.71", "341.1", "T", "57.6", "024.5", "T", "0.4", "4.1", "N", "b", "L", "", "457362", "А"};
+        fields[6]="rre";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getTTMMethod.invoke(mr231_3Converter, null));
         assertTrue(thrown.getCause().toString().contains("TTM Ошибка во время преобразования введения данных"));
 
     }
@@ -199,17 +223,53 @@ class Mr231_3ConverterTest {
         assertEquals(expectedRSD.getWorkingMode(), actualRSD.getWorkingMode());
     }
 
-    // Хочется для каждого поля в fiels отдельный тест
     @Test
     void getRSD_IncorrectData_ExceptionThrown() throws Exception {
-        String[] fields = new String[]{"RSD", "1s2", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        String[] fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
         Method getRSDMethod = Mr231_3Converter.class.getDeclaredMethod("getRSD", null);
         getRSDMethod.setAccessible(true);
-
         Field fieldsField = mr231_3Converter.getClass().getDeclaredField("fields");
         fieldsField.setAccessible(true);
+
+        fields[1]="qw";
         fieldsField.set(mr231_3Converter, fields);
         Exception thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[2]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[3]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[4]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[9]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[10]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
+        assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
+
+        fields = new String[]{"RSD", "12", "28.71", "341.1", "23", "", "", "", "", "4.1", "21", "12", "K", "C", "S"};
+        fields[11]="hjh";
+        fieldsField.set(mr231_3Converter, fields);
+        thrown = assertThrows(Exception.class, () -> getRSDMethod.invoke(mr231_3Converter, null));
         assertTrue(thrown.getCause().toString().contains("RSD Ошибка во время преобразования введенных данных"));
     }
 }

@@ -2,8 +2,8 @@ package org.example.searadar.mr231_3.convert;
 
 import org.apache.camel.Exchange;
 import org.example.searadar.mr231_3.DataChecker;
-import org.example.searadar.mr231_3.Impl.DataCheckerRSD;
-import org.example.searadar.mr231_3.Impl.DataCheckerTTM;
+import org.example.searadar.mr231_3.DataCheckerImpl.DataCheckerRSD;
+import org.example.searadar.mr231_3.DataCheckerImpl.DataCheckerTTM;
 import ru.oogis.searadar.api.convert.SearadarExchangeConverter;
 import ru.oogis.searadar.api.message.InvalidMessage;
 import ru.oogis.searadar.api.message.RadarSystemDataMessage;

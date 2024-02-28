@@ -7,4 +7,4 @@
    #### cd Code
    #### docker build -t app_task_1 .
    #### docker run --name App_task_1_container -d app_task_1
-Программа сразу выполниться и выведет в Stdout/Logs результат работы.
+Программа сразу выполнится и выведет в Stdout/Logs результат работы.
